@@ -8,13 +8,17 @@ One should simply execute "prepare_DNSdata.sh". The other files will be copied i
 
 
 MyConfig    	- it is a file required by Sgrid to be compiled with a proper options. You are setting here the compiler, libraries, etc.
+
 dns.th      	- it is a thorns list required by Cactus (and by GetComponents script to download all necessary components to compile Cactus.
+
 dns.cfg		- it is a configuration file which contains a compilation options. In particular, the Sgrid library path is set in it.
+
 dns.par		- it is an example of Cactus input parameter file. There is a place in it to set the parameters related to DNSdata thorn. In particular, you must set the path to Sgrid-generated initial data in it.
+
 ll_comp.sh	- it is just a sbath submission script which you may use to compile Cactus. Of course, it is a template to be modified before using. 
 
 
---------------------------------- What to do now ---------------------------------
+--------------------------------- What to do to make it working ---------------------------------
 
 There are a couple of things to do to make it working. Please be aware that further steps may depend on the machine you are working at and your private modules, libraries, compilers, etc.
 

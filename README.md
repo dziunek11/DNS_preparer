@@ -28,7 +28,9 @@ There are a couple of things to do to make it working. Please be aware that furt
 "./simfactory/bin/sim setup-silent"
 "./simfactory/bin/sim build -j12 --thornlist ../dns.th --optionlist ../dns.cfg"
 
-4. Set the right path to the Sgrid-generated initial data directory in dns.par. and build the skeleton of the run by typing:
+4. Set the right path to the Sgrid-generated initial data directory in dns.par file: 
+"DNSdata::sgrid_datadir = "path_to_ID_directory" ", 
+and then build the skeleton of the run by typing:
 "./simfactory/bin/sim create-run name_of_the_run --parfile ../dns.par"
 
 5. See Cactus/arrangements/CactusSgrid/DNSdata/README for details related to the properties of the DNSdata thorn.

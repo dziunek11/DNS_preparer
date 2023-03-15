@@ -20,11 +20,26 @@ curl -kLO https://raw.githubusercontent.com/gridaphobe/CRL/ET_2022_05/GetCompone
 chmod a+x GetComponents
 ./GetComponents dns.th
 cp ../ll_comp.sh Cactus/
-cd ..
-mv $XXX ../
 
 echo ''
 echo 'Cactus downloaded'
+echo ''
+
+git clone https://github.com/zachetienne/nrpytutorial.git
+cd nrpytutorial/IllinoisGRMHD/doc
+./generate_IllinoisGRMHD_from_ipynb_files.sh
+cd ../../../Cactus/arrangements/WVUThorns
+rm IllinoisGRMHD
+rm Convert_to_HydroBase
+rm ID_converter_ILGRMHD
+ln -s ../../nrp/nrpytutorial/IllinoisGRMHD/ IllinoisGRMHD
+ln -s ../../nrp/nrpytutorial/IllinoisGRMHD/Convert_to_HydroBase Convert_to_HydroBase
+ln -s ../../nrp/nrpytutorial/IllinoisGRMHD/ID_converter_ILGRMHD ID_converter_ILGRMHD
+
+cd ../../../../
+
+echo ''
+echo 'nrp downloaded and linked'
 echo 'All done'
 echo 'Things to do now'
 echo ''
@@ -36,7 +51,7 @@ echo 'LIBS = sgrid'
 echo ''
 echo '3. Go to Cactus directory and compile it using ll_comp or by typing:'
 echo './simfactory/bin/sim setup-silent'
-echo './simfactory/bin/sim build -j12 --thornlist ../dns.th --optionlist ../dns.cfg'
+echo './simfactory/bin/sim build -j24 --thornlist ../dns.th --optionlist ../dns.cfg'
 echo ''
 echo '4. Set the right path to the Sgrid-generated initial data directory in dns.par. and build the skeleton of the run by typing:'
 echo './simfactory/bin/sim create-run name_of_the_run --parfile ../dns.par'

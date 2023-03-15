@@ -32,9 +32,9 @@ cd ../../../Cactus/arrangements/WVUThorns
 rm IllinoisGRMHD
 rm Convert_to_HydroBase
 rm ID_converter_ILGRMHD
-ln -s ../../nrp/nrpytutorial/IllinoisGRMHD/ IllinoisGRMHD
-ln -s ../../nrp/nrpytutorial/IllinoisGRMHD/Convert_to_HydroBase Convert_to_HydroBase
-ln -s ../../nrp/nrpytutorial/IllinoisGRMHD/ID_converter_ILGRMHD ID_converter_ILGRMHD
+ln -s ../../../nrpytutorial/IllinoisGRMHD/ IllinoisGRMHD
+ln -s ../../../nrpytutorial/IllinoisGRMHD/Convert_to_HydroBase Convert_to_HydroBase
+ln -s ../../../nrpytutorial/IllinoisGRMHD/ID_converter_ILGRMHD ID_converter_ILGRMHD
 
 cd ../../../../
 

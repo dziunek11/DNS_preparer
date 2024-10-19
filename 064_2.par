@@ -1,0 +1,620 @@
+
+ActiveThorns = "
+ADMBase
+ADMCoupling
+ADMmacros
+ADMMass
+AEILocalInterp
+Boundary
+Carpet
+CarpetInterp
+CarpetIOASCII
+CarpetIOBasic
+CarpetIOHDF5
+CarpetIOScalar
+CarpetLib
+CarpetReduce
+CarpetRegrid2
+CartGrid3D
+CoordBase
+CoordGauge
+Fortran
+GenericFD
+GSL
+HDF5
+HydroBase
+InitBase
+IOUtil
+LocalInterp
+LoopControl
+MoL
+MPI
+NaNChecker
+CarpetMask
+SpaceMask
+StaticConformal
+SymBase
+SystemStatistics
+TerminationTrigger #checkpoint after some time
+Time
+Timers
+TmunuBase
+Vectors
+zlib
+IllinoisGRMHD
+ID_converter_ILGRMHD
+SummationByParts
+VolumeIntegrals_GRMHD
+VolumeIntegrals_vacuum
+convert_to_HydroBase
+weylscal4
+AHFinderDirect
+SphericalSurface
+QuasiLocalMeasures
+Multipole
+Baikal
+NewRad
+DNSdata
+Trigger
+smallbPoynET
+Outflow
+"
+
+Cactus::cctk_run_title            = "jupiter"
+Cactus::cctk_full_warnings        = "yes"
+Cactus::cctk_itlast               = 10000000
+
+IOUtil::out_dir          = data/$parfile
+
+
+Carpet::storage_verbose           = "no"
+Carpet::verbose                   = "no"
+Carpet::veryverbose               = "no"
+CarpetMask::verbose               = "no"
+CarpetReduce::verbose             = "no"
+CarpetRegrid2::verbose            = "no"
+CarpetRegrid2::veryverbose        = "no"
+QuasiLocalMeasures::verbose       = "no"
+SphericalSurface::verbose         = "no"
+VolumeIntegrals_GRMHD::verbose    = 0
+WeylScal4::verbose                = 0
+AHFinderDirect::verbose_level     = "algorithm debug" # "physics highlights"
+NaNChecker::verbose               = "all"
+
+ADMBase::evolution_method         = "Baikal"
+ADMBase::lapse_evolution_method   = "Baikal"
+ADMBase::shift_evolution_method   = "Baikal"
+ADMBase::dtlapse_evolution_method = "Baikal"
+ADMBase::dtshift_evolution_method = "Baikal"
+
+HydroBase::initial_hydro          = "DNSdata"
+ADMBase::initial_data             = "DNSdata"
+ADMBase::initial_lapse            = "DNSdata"
+ADMBase::initial_shift            = "zero"
+ADMBase::initial_dtlapse          = "DNSdata"
+ADMBase::initial_dtshift          = "zero"
+
+DNSdata::sgrid_datadir            = "/mnt/beegfs/scratch/wolf/FAU-NR/AAMP/spin_test/sgrid_files/101_26"
+DNSdata::keep_sgrid_output        = "yes"
+DNSdata::use_interpolator         = "yes"
+#DNSdata::IDfiles_dir             = "???"
+
+ADMBase::metric_type              = "physical"
+ADMBase::metric_timelevels        = 3
+ADMBase::lapse_timelevels         = 3
+ADMBase::shift_timelevels         = 3
+smallbPoynET::smallbPoynET_compute_every = 256
+Baikal::diss_strength = 0.2
+Baikal::eta           = 0.3333333333333333333333333333 # M_ADM = 3.0 -> eta = 1/3 = 1.0/M
+SpaceMask::use_mask = "yes"
+
+convert_to_HydroBase::convert_to_HydroBase_every = 256 # needed for particle tracer
+Time::dtfac = 0.225
+
+CartGrid3D::type                              = "coordbase"
+
+CarpetLib::support_staggered_operators        = "yes"
+CarpetLib::combine_recompose                  = "no"
+CarpetLib::poison_new_memory                  = "yes"
+CarpetLib::poison_value                       = 114
+CarpetLib::output_bboxes                      = "no"
+CarpetLib::print_memstats_every               = 4096
+CarpetLib::print_timestats_every              = 4096
+CarpetLib::interleave_communications          = "yes"
+CarpetLib::combine_sends                      = "no"
+
+CarpetRegrid2::freeze_unaligned_levels        = "yes"
+CarpetRegrid2::freeze_unaligned_parent_levels = "yes"
+CarpetRegrid2::ensure_proper_nesting          = "yes"
+CarpetRegrid2::snap_to_coarse                 = "yes"
+
+CarpetRegrid2::regrid_every                   = 256
+CarpetRegrid2::symmetry_rotating180           = "no"
+
+CarpetRegrid2::num_centres                    = 2
+CarpetRegrid2::num_levels_1                   = 7
+CarpetRegrid2::num_levels_2                   = 7
+CarpetRegrid2::position_x_1                   = -50.43739031329980804
+CarpetRegrid2::position_x_2                   =  50.43738913972365623
+
+CarpetRegrid2::radius_1[1]                    = 460.032000000000
+CarpetRegrid2::radius_1[2]                    = 230.016000000000
+CarpetRegrid2::radius_1[3]                    = 57.5040000000000
+CarpetRegrid2::radius_1[4]                    = 28.7520000000000
+CarpetRegrid2::radius_1[5]                    = 14.3760000000000
+CarpetRegrid2::radius_1[6]                    = 14.3760000000000/2.0
+
+CarpetRegrid2::radius_2[1]                    = 460.032000000000
+CarpetRegrid2::radius_2[2]                    = 230.016000000000
+CarpetRegrid2::radius_2[3]                    = 57.5040000000000
+CarpetRegrid2::radius_2[4]                    = 28.7520000000000
+CarpetRegrid2::radius_2[5]                    = 14.3760000000000
+CarpetRegrid2::radius_2[6]                    = 14.3760000000000/2.0
+
+CoordBase::boundary_size_x_lower              = 3
+CoordBase::boundary_size_x_upper              = 3
+CoordBase::boundary_size_y_lower              = 3
+CoordBase::boundary_size_y_upper              = 3
+CoordBase::boundary_size_z_lower              = 3
+CoordBase::boundary_size_z_upper              = 3
+CoordBase::domainsize                         = "minmax"
+CoordBase::dx                                 = 14.376
+CoordBase::dy                                 = 14.376
+CoordBase::dz                                 = 14.376
+CoordBase::spacing                            = "gridspacing"  # "gridspacing" or "numcells"
+CoordBase::xmax                               =  14.376*64
+CoordBase::xmin                               = -14.376*64
+CoordBase::ymax                               =  14.376*64
+CoordBase::ymin                               = -14.376*64
+CoordBase::zmax                               =  14.376*64
+CoordBase::zmin                               = -14.376*64
+
+CarpetMask::excluded_surface       [0]        = 2
+CarpetMask::excluded_surface_factor[0]        = 1.0
+
+VolumeIntegrals_GRMHD::NumIntegrals                                     = 6
+VolumeIntegrals_GRMHD::VolIntegral_out_every                            = 256 # to be consistent with frequency of Carpet regridding
+VolumeIntegrals_GRMHD::enable_file_output                               = 1
+VolumeIntegrals_GRMHD::outVolIntegral_dir                               = IOUtil::out_dir+"/volume_integration"
+VolumeIntegrals_GRMHD::Integration_quantity_keyword[1]                  = "one"
+VolumeIntegrals_GRMHD::Integration_quantity_keyword[2]                  = "centerofmass"
+VolumeIntegrals_GRMHD::Integration_quantity_keyword[3]                  = "one"
+VolumeIntegrals_GRMHD::Integration_quantity_keyword[4]                  = "centerofmass"
+VolumeIntegrals_GRMHD::Integration_quantity_keyword[5]                  = "one"
+VolumeIntegrals_GRMHD::Integration_quantity_keyword[6]                  = "restmass"
+
+VolumeIntegrals_GRMHD::volintegral_sphere__center_x_initial         [2] = -50.43739031329980804
+VolumeIntegrals_GRMHD::volintegral_inside_sphere__radius            [2] = 14.3760000000000/2.0
+VolumeIntegrals_GRMHD::amr_centre__tracks__volintegral_inside_sphere[2] =     0
+VolumeIntegrals_GRMHD::volintegral_sphere__center_x_initial         [3] = -50.43739031329980804
+VolumeIntegrals_GRMHD::volintegral_inside_sphere__radius            [3] = 14.3760000000000/2.0
+VolumeIntegrals_GRMHD::amr_centre__tracks__volintegral_inside_sphere[3] =     0
+
+VolumeIntegrals_GRMHD::volintegral_sphere__center_x_initial         [4] = 50.43738913972365623
+VolumeIntegrals_GRMHD::volintegral_inside_sphere__radius            [4] = 14.3760000000000/2.0
+VolumeIntegrals_GRMHD::amr_centre__tracks__volintegral_inside_sphere[4] =     1
+VolumeIntegrals_GRMHD::volintegral_sphere__center_x_initial         [5] = 50.43738913972365623
+VolumeIntegrals_GRMHD::volintegral_inside_sphere__radius            [5] = 14.3760000000000/2.0
+VolumeIntegrals_GRMHD::amr_centre__tracks__volintegral_inside_sphere[5] =     1
+
+#######
+VolumeIntegrals_vacuum::HamiltonianVarString                  = "Baikal::HGF"
+VolumeIntegrals_vacuum::Momentum0VarString                    = "Baikal::MU0GF"
+VolumeIntegrals_vacuum::Momentum1VarString                    = "Baikal::MU1GF"
+VolumeIntegrals_vacuum::Momentum2VarString                    = "Baikal::MU2GF"
+
+VolumeIntegrals_vacuum::NumIntegrals                          = 4
+VolumeIntegrals_vacuum::VolIntegral_out_every                 = 256 # to be consistent with frequency of Carpet regridding
+VolumeIntegrals_vacuum::enable_file_output                    = 1
+VolumeIntegrals_vacuum::outVolIntegral_dir                    = IOUtil::out_dir+"/volume_integration"
+VolumeIntegrals_vacuum::verbose                               = 1
+VolumeIntegrals_vacuum::Integration_quantity_keyword[1]      = "ADM_Mass"
+VolumeIntegrals_vacuum::Integration_quantity_keyword[2]      = "ADM_Momentum"
+VolumeIntegrals_vacuum::Integration_quantity_keyword[3]      = "ADM_Angular_Momentum"
+VolumeIntegrals_vacuum::Integration_quantity_keyword[4]      = "H_M_CnstraintsL2"
+VolumeIntegrals_vacuum::volintegral_outside_sphere__radius[1] = 0.0
+VolumeIntegrals_vacuum::volintegral_outside_sphere__radius[2] = 0.0
+VolumeIntegrals_vacuum::volintegral_outside_sphere__radius[3] = 0.0
+VolumeIntegrals_vacuum::volintegral_outside_sphere__radius[4] = 0.0
+
+VolumeIntegrals_vacuum::enable_time_reparameterization        = "no"
+VolumeIntegrals_vacuum::VIv_time_reparam_t0                   = 10
+VolumeIntegrals_vacuum::VIv_time_reparam_w                    = 5
+
+
+
+IllinoisGRMHD::conserv_to_prims_debug = 0
+IllinoisGRMHD::Psi6threshold          = 60.0
+IllinoisGRMHD::damp_lorenz            = 0.0
+IllinoisGRMHD::rho_b_max              = 0.01
+IllinoisGRMHD::Symmetry               = "none"
+IllinoisGRMHD::update_Tmunu           = "yes"
+IllinoisGRMHD::rho_b_atm              = 1.0e-13
+IllinoisGRMHD::tau_atm                = 5.74421687884737e-19
+
+
+HydroBase::initial_Avec               = "zero"
+HydroBase::initial_Aphi               = "zero"
+HydroBase::timelevels                 = 3
+
+SphericalSurface::nsurfaces = 17
+SphericalSurface::maxntheta = 39
+SphericalSurface::maxnphi = 76
+
+SphericalSurface::ntheta      [0] = 39
+SphericalSurface::nphi        [0] = 76
+SphericalSurface::nghoststheta[0] = 2
+SphericalSurface::nghostsphi  [0] = 2
+SphericalSurface::name        [0] = "Righthand NS"
+
+SphericalSurface::ntheta      [1] = 39
+SphericalSurface::nphi        [1] = 76
+SphericalSurface::nghoststheta[1] = 2
+SphericalSurface::nghostsphi  [1] = 2
+SphericalSurface::name        [1] = "Lefthand NS"
+
+SphericalSurface::ntheta      [2] = 39
+SphericalSurface::nphi        [2] = 76
+SphericalSurface::nghoststheta[2] = 2
+SphericalSurface::nghostsphi  [2] = 2
+SphericalSurface::name        [2] = "apparent horizon"
+
+SphericalSurface::ntheta      [3] = 39
+SphericalSurface::nphi        [3] = 76
+SphericalSurface::nghoststheta[3] = 2
+SphericalSurface::nghostsphi  [3] = 2
+SphericalSurface::set_spherical[3] = yes
+SphericalSurface::radius      [3] = 250
+SphericalSurface::name        [3] = "waveextract surface at 250"
+
+SphericalSurface::ntheta      [4] = 39
+SphericalSurface::nphi        [4] = 76
+SphericalSurface::nghoststheta[4] = 2
+SphericalSurface::nghostsphi  [4] = 2
+SphericalSurface::set_spherical[4] = yes
+SphericalSurface::radius      [4] = 300
+SphericalSurface::name        [4] = "waveextract surface at 300"
+
+SphericalSurface::ntheta      [5] = 39
+SphericalSurface::nphi        [5] = 76
+SphericalSurface::nghoststheta[5] = 2
+SphericalSurface::nghostsphi  [5] = 2
+SphericalSurface::set_spherical[5] = yes
+SphericalSurface::radius      [5] = 350
+SphericalSurface::name        [5] = "waveextract surface at 350"
+
+SphericalSurface::ntheta      [6] = 39
+SphericalSurface::nphi        [6] = 76
+SphericalSurface::nghoststheta[6] = 2
+SphericalSurface::nghostsphi  [6] = 2
+SphericalSurface::set_spherical[6] = yes
+SphericalSurface::radius      [6] = 400
+SphericalSurface::name        [6] = "waveextract surface at 400"
+
+SphericalSurface::ntheta      [7] = 39
+SphericalSurface::nphi        [7] = 76
+SphericalSurface::nghoststheta[7] = 2
+SphericalSurface::nghostsphi  [7] = 2
+SphericalSurface::set_spherical[7] = yes
+SphericalSurface::radius      [7] = 450
+SphericalSurface::name        [7] = "waveextract surface at 450"
+
+SphericalSurface::ntheta      [8] = 39
+SphericalSurface::nphi        [8] = 76
+SphericalSurface::nghoststheta[8] = 2
+SphericalSurface::nghostsphi  [8] = 2
+SphericalSurface::set_spherical[8] = yes
+SphericalSurface::radius      [8] = 500
+SphericalSurface::name        [8] = "waveextract surface at 500"
+
+SphericalSurface::ntheta      [9] = 39
+SphericalSurface::nphi        [9] = 76
+SphericalSurface::nghoststheta[9] = 2
+SphericalSurface::nghostsphi  [9] = 2
+SphericalSurface::set_spherical[9] = yes
+SphericalSurface::radius      [9] = 550
+SphericalSurface::name        [9] = "waveextract surface at 550"
+
+SphericalSurface::ntheta      [10] = 39
+SphericalSurface::nphi        [10] = 76
+SphericalSurface::nghoststheta[10] = 2
+SphericalSurface::nghostsphi  [10] = 2
+SphericalSurface::set_spherical[10] = yes
+SphericalSurface::radius      [10] = 600
+SphericalSurface::name        [10] = "waveextract surface at 600"
+
+SphericalSurface::ntheta      [11] = 39
+SphericalSurface::nphi        [11] = 76
+SphericalSurface::nghoststheta[11] = 2
+SphericalSurface::nghostsphi  [11] = 2
+SphericalSurface::set_spherical[11] = yes
+SphericalSurface::radius      [11] = 650
+SphericalSurface::name        [11] = "waveextract surface at 650"
+
+SphericalSurface::ntheta      [12] = 39
+SphericalSurface::nphi        [12] = 76
+SphericalSurface::nghoststheta[12] = 2
+SphericalSurface::nghostsphi  [12] = 2
+SphericalSurface::set_spherical[12] = yes
+SphericalSurface::radius      [12] = 700
+SphericalSurface::name        [12] = "waveextract surface at 700"
+
+SphericalSurface::ntheta      [13] = 39
+SphericalSurface::nphi        [13] = 76
+SphericalSurface::nghoststheta[13] = 2
+SphericalSurface::nghostsphi  [13] = 2
+SphericalSurface::set_spherical[13] = yes
+SphericalSurface::radius      [13] = 750
+SphericalSurface::name        [13] = "waveextract surface at 750"
+
+SphericalSurface::ntheta      [14] = 39
+SphericalSurface::nphi        [14] = 76
+SphericalSurface::nghoststheta[14] = 2
+SphericalSurface::nghostsphi  [14] = 2
+SphericalSurface::set_spherical[14] = yes
+SphericalSurface::radius      [14] = 800
+SphericalSurface::name        [14] = "waveextract surface at 800"
+
+SphericalSurface::ntheta      [15] = 39
+SphericalSurface::nphi        [15] = 76
+SphericalSurface::nghoststheta[15] = 2
+SphericalSurface::nghostsphi  [15] = 2
+SphericalSurface::set_spherical[15] = yes
+SphericalSurface::radius      [15] = 850
+SphericalSurface::name        [15] = "waveextract surface at 850"
+
+SphericalSurface::ntheta      [16] = 39
+SphericalSurface::nphi        [16] = 76
+SphericalSurface::nghoststheta[16] = 2
+SphericalSurface::nghostsphi  [16] = 2
+SphericalSurface::set_spherical[16] = yes
+SphericalSurface::radius      [16] = 900
+SphericalSurface::name        [16] = "waveextract surface at 900"
+
+
+#ADMMass::ADMMass_use_surface_distance_as_volume_radius = no
+ADMMass::ADMMass_use_all_volume_as_volume_radius       = yes
+#ADMMass::ADMMass_surface_distance[0]           = 200
+#ADMMass::ADMMass_volume_radius[0]          = 100000000
+
+
+
+#SetMask_SphericalSurface::SetMask_SurfaceName[0] = "apparent horizon"
+#SetMask_SphericalSurface::SetMask_RadiusFactor[0] = 0.85
+
+AHFinderDirect::bh_diagnostics_directory                 = data/${parfile}/H
+AHFinderDirect::h_base_file_name                         = "horizon.h"
+AHFinderDirect::which_surface_to_store_info_by_name[1]   = "apparent horizon"
+AHFinderDirect::N_horizons                               = 1
+AHFinderDirect::find_every                               = 256
+AHFinderDirect::output_h_every                           = 256
+AHFinderDirect::run_at_CCTK_POST_RECOVER_VARIABLES       = "no"
+AHFinderDirect::move_origins                             = "yes"
+AHFinderDirect::reshape_while_moving                     = "yes"
+AHFinderDirect::predict_origin_movement                  = "yes"
+AHFinderDirect::max_Newton_iterations__initial           = 50
+AHFinderDirect::max_Newton_iterations__subsequent        = 50
+AHFinderDirect::max_allowable_Theta_growth_iterations    = 10
+AHFinderDirect::max_allowable_Theta_nonshrink_iterations = 10
+AHFinderDirect::geometry_interpolator_name               = "Lagrange polynomial interpolation"
+AHFinderDirect::geometry_interpolator_pars               = "order=4"
+AHFinderDirect::surface_interpolator_name                = "Lagrange polynomial interpolation"
+AHFinderDirect::surface_interpolator_pars                = "order=4"
+AHFinderDirect::initial_guess_method[1]                  = "coordinate sphere"
+AHFinderDirect::max_allowable_horizon_radius[1]          = 20.0
+AHFinderDirect::reset_horizon_after_not_finding[1]       = "no"
+#AHFinderDirect::find_after_individual[1]                 = 400000
+AHFinderDirect::find_after_individual_time[1]            = 7000
+
+
+AHFinderDirect::origin_x[1]                              = 0.0
+AHFinderDirect::origin_y[1]                              = 0.0
+AHFinderDirect::origin_z[1]                              = 0.0
+AHFinderDirect::initial_guess__coord_sphere__x_center[1] = 0.0
+AHFinderDirect::initial_guess__coord_sphere__y_center[1] = 0.0
+AHFinderDirect::initial_guess__coord_sphere__z_center[1] = 0.0
+AHFinderDirect::initial_guess__coord_sphere__radius[1]   = 2.0
+
+
+
+QuasiLocalMeasures::num_surfaces         = 5
+QuasiLocalMeasures::spatial_order        = 4
+QuasiLocalMeasures::interpolator         = "Lagrange polynomial interpolation"
+QuasiLocalMeasures::interpolator_options = "order=4"
+QuasiLocalMeasures::surface_name[0]      = "Righthand NS"
+QuasiLocalMeasures::surface_name[1]      = "Lefthand NS"
+QuasiLocalMeasures::surface_name[2]      = "apparent horizon"
+QuasiLocalMeasures::surface_name[3]      = "waveextract surface at 250"
+QuasiLocalMeasures::surface_name[4]      = "waveextract surface at 900"
+
+
+WeylScal4::fd_order                  = "4th"
+WeylScal4::calc_scalars              = "psi4"
+weylscal4::calc_invariants           = "always"
+
+Multipole::out_dir    = data/${parfile}/M
+Multipole::nradii     = 14
+Multipole::radius[0]  = 250
+Multipole::radius[1]  = 300
+Multipole::radius[2]  = 350
+Multipole::radius[3]  = 400
+Multipole::radius[4]  = 450
+Multipole::radius[5]  = 500
+Multipole::radius[6]  = 550
+Multipole::radius[7]  = 600
+Multipole::radius[8]  = 650
+Multipole::radius[9]  = 700
+Multipole::radius[10] = 750
+Multipole::radius[11] = 800
+Multipole::radius[12] = 850
+Multipole::radius[13] = 900
+
+Multipole::variables = "WeylScal4::Psi4r{sw=-2 cmplx='WeylScal4::Psi4i' name='Psi4'}"
+Multipole::l_max     = 4
+Multipole::out_every = 256
+
+Outflow::compute_every        = 256
+Outflow::num_detectors        = 2
+Outflow::surface_index[0]     = 3
+Outflow::surface_index[1]     = 4
+Outflow::interpolator_name    = "Lagrange polynomial interpolation"
+Outflow::interpolator_pars    = "order=4"
+Outflow::verbose              = 0
+
+
+Boundary::radpower = 2
+
+# Parameters of thorn Carpet (implementing Driver)
+Carpet::check_for_poison         = "no"
+Carpet::convergence_level        = 0
+Carpet::domain_from_coordbase    = "yes"
+Carpet::enable_all_storage       = "no"
+Carpet::ghost_size               = 3
+Carpet::init_fill_timelevels     = "yes"
+Carpet::init_3_timelevels        = "no"
+Carpet::max_refinement_levels    = 10
+Carpet::output_timers_every      = 512
+Carpet::poison_new_timelevels    = "yes"
+Carpet::prolongation_order_space = 5
+Carpet::prolongation_order_time  = 2
+Carpet::time_refinement_factors  = "[1,2,4,4,8,16,32,64,128,256]"
+Carpet::use_buffer_zones         = "yes"
+
+
+# Parameters of thorn CarpetInterp (implementing interp)
+CarpetInterp::check_tree_search = "no"
+CarpetInterp::tree_search       = "yes"
+
+TmunuBase::prolongation_type     = "none"
+TmunuBase::stress_energy_at_RHS  = "yes"
+TmunuBase::stress_energy_storage = "yes"
+TmunuBase::timelevels            = 1
+
+ID_converter_ILGRMHD::pure_hydro_run = "yes"
+
+# Configure EOS_Omni and IllinoisGRMHD
+
+IllinoisGRMHD::neos                  = 4
+IllinoisGRMHD::Gamma_th              = 1.75
+IllinoisGRMHD::K_ppoly_tab0          = 8.94989354e-02
+IllinoisGRMHD::rho_ppoly_tab_in[0]   = 2.36701096e-04
+IllinoisGRMHD::rho_ppoly_tab_in[1]   = 8.11322219e-04
+IllinoisGRMHD::rho_ppoly_tab_in[2]   = 1.61880065e-03
+IllinoisGRMHD::Gamma_ppoly_tab_in[0] = 1.0 + 1.0/2.80171728459242
+IllinoisGRMHD::Gamma_ppoly_tab_in[1] = 1.0 + 1.0/0.498753117206983
+IllinoisGRMHD::Gamma_ppoly_tab_in[2] = 1.0 + 1.0/0.503018108651911
+IllinoisGRMHD::Gamma_ppoly_tab_in[3] = 1.0 + 1.0/0.540248514316586
+
+
+# Parameters of thorn MoL (implementing MethodOfLines)
+MoL::MoL_Intermediate_Steps                     = 4
+MoL::MoL_Num_Scratch_Levels                     = 1
+MoL::ODE_Method                                 = "RK4"
+MoL::run_MoL_PostStep_in_Post_Recover_Variables = "no"
+
+# Parameters of thorn NaNChecker (implementing NaNChecker)
+NaNChecker::action_if_found = "terminate"
+NaNChecker::check_every     = 256
+NaNChecker::check_vars      = "
+  IllinoisGRMHD::grmhd_conservatives
+  ADMBase::curv
+  ADMBase::dtshift
+  ADMBase::lapse
+  ADMBase::metric
+  ADMBase::shift
+  Baikal::hDD00GF
+"
+
+
+##########################################################
+
+     #      #################################      #
+     #      #                               #      #
+     #      #                               #      #
+  #######   #            OUTPUT             #   #######
+   #####    #                               #    #####
+    ###     #                               #     ###
+     #      #################################      #
+ 
+##########################################################
+
+
+# Parameters of thorn CarpetIOScalar (implementing IOScalar)
+CarpetIOScalar::outScalar_dir  = data/${parfile}/A
+CarpetIOScalar::one_file_per_group   = "no"
+#CarpetIOScalar::outScalar_every      = 1
+CarpetIOScalar::outScalar_every      = 1e9    # 256
+CarpetIOScalar::outscalar_criterion  = time
+CarpetIOScalar::outScalar_dt         = (CoordBase::dx)*(Time::dtfac)
+CarpetIOScalar::all_reductions_in_one_file = "yes"
+CarpetIOScalar::outScalar_vars       = "
+  IllinoisGRMHD::rho_b
+  IllinoisGRMHD::P
+  IllinoisGRMHD::vx
+  IllinoisGRMHD::vy
+  IllinoisGRMHD::vz
+  ADMBase::alp
+  Baikal::HGF
+  Baikal::MU0GF
+  Baikal::MU1GF
+  Baikal::MU2GF
+  SystemStatistics::process_memory_mb
+  ADMMass::ADMMass_Masses
+"
+
+# Parameters of thorn CarpetIOASCII (implementing IOASCII)
+CarpetIOASCII::out0D_dir = data/${parfile}/B
+CarpetIOASCII::out0D_every            = 256
+CarpetIOASCII::one_file_per_group     = "no"
+CarpetIOASCII::out0D_vars             = "
+  Carpet::physical_time_per_hour
+  outflow::outflow_flux[0]
+  outflow::outflow_flux[1]
+  outflow::outflow_flux[2]
+  outflow::outflow_flux[3]
+  outflow::outflow_flux[4]
+  outflow::outflow_flux[5]
+  outflow::outflow_flux[6]
+  ADMMass::ADMMass_Masses
+  QuasiLocalMeasures::qlm_scalars
+  Carpet::physical_time_per_hour
+  SphericalSurface::sf_active
+  SphericalSurface::sf_valid
+  SphericalSurface::sf_info
+  SphericalSurface::sf_radius
+  SphericalSurface::sf_origin
+  SphericalSurface::sf_coordinate_descriptors
+"
+
+# Parameters of thorn CarpetIOHDF5 (implementing IOHDF5)
+CarpetIOHDF5::out2D_dir                     = data/${parfile}/H5
+CarpetIOHDF5::checkpoint                    = "yes"
+CarpetIOHDF5::compression_level             = 0
+CarpetIOHDF5::one_file_per_group            = "no"
+CarpetIOHDF5::open_one_input_file_at_a_time = "yes"
+#CarpetIOHDF5::out2D_every                   = 1
+CarpetIOHDF5::out2D_every                   = 1e9    # 1024
+CarpetIOHDF5::out2D_criterion               = time
+CarpetIOHDF5::out2D_dt                      = (CoordBase::dx)*(Time::dtfac)*10
+CarpetIOHDF5::out2D_vars                    = "
+  IllinoisGRMHD::rho_b
+  IllinoisGRMHD::P
+  IllinoisGRMHD::vx
+  IllinoisGRMHD::vy
+  IllinoisGRMHD::vz
+  ADMBase::lapse
+"
+
+# Parameters of thorn InitBase (implementing InitBase)
+InitBase::initial_data_setup_method = "init_all_levels"
+
+# Parameters of thorn IOUtil (implementing IO)
+IOUtil::checkpoint_dir          = IOUtil::out_dir+"/checkpoints"
+IOUtil::recover_dir             = IOUtil::checkpoint_dir
+IOUtil::checkpoint_every_walltime_hours = 5.66
+IOUtil::checkpoint_keep         = 0
+IOUtil::recover_and_remove      = "yes" ## should remove only after the next checkpoint is successfully written.
+IOUtil::checkpoint_on_terminate = "yes"
+IOUtil::out_fileinfo            = "none"
+IOUtil::parfile_write           = "generate"
+IOUtil::recover                 = "autoprobe"

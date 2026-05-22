@@ -24,7 +24,7 @@ There are a couple of things to do to make it working. Please be aware that furt
 "LIBDIRS = path_to_this_project/sgrid/lib", and then the library itself:
 "LIBS = sgrid"
 
-3. Go to Cactus directory and compile it using ll_comp.sh or by typing:
+3. Go to Cactus directory and compile it using s_comp.sh or by typing:
 "./simfactory/bin/sim setup-silent"
 "./simfactory/bin/sim build -j12 --thornlist ../dns.th --optionlist ../dns.cfg"
 
